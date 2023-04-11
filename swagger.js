@@ -55,13 +55,13 @@ module.exports={
             },
             500:{
                 description:"Internal server error",
-                content:{
-                    'application/json':{
-                        schema:{
-                            "$ref": "#/components/schemas/generalError"
-                        }
-                    }
-                }
+                // content:{
+                //     'application/json':{
+                //         schema:{
+                //             "$ref": "#/components/schemas/generalError"
+                //         }
+                //     }
+                // }
             },
             409:{
                 description:"User already exists"
@@ -78,7 +78,7 @@ module.exports={
                 in:'header',
                 bearerFormat:'JWT'
             }
-        },
+        },    
         paths:{
             register:{
                 post:{
@@ -225,32 +225,17 @@ module.exports={
                         bearerAuth:[]
                     }], 
                   
-                    "parameters": [
+                    parameters: [
                         {
                           "name": "id",
-                          "in": "query",
+                          "in": "path",
                           "description": "id",
-                          "required": true,
+                          "required": false,
                           "schema": {
                             "type": "string"
                           }
                         }
                       ],
-                    // headers:{
-                    //     required:true,
-                    //     content:{
-                    //         header:{
-                    //             schema:{
-                    //                 type: 'string',
-                    //                 properties:{
-                    //                     accessToken:{
-                    //                         type:"string"
-                    //                     }
-                    //                 }
-                    //             }
-                    //         }
-                    //     }
-                    // },
                     responses:{
                         200:{
                             description: "Successfully tested"
