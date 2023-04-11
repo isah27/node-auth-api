@@ -3,33 +3,38 @@ const router=express.Router()
 const {register,login,refreshToken,logout}=require('../controllers/auth.controller')
 
 /**
- * @swagger
+* @swagger
  * tags:
- *   name: Users
- *   description: Api endpoint to manage user authentication
+ *   name: User
+ *   description: Authentication API endpoints
  */
-
-
 
 /**
  * @swagger
- *   /register: 
- *     post: 
- *       summary: register user to the system
- *       tags: [Users]
- *       responses:
- *         "201":
- *           $ref:'#/components/responses/201'
- *         "409":
- *             $ref:'#/components/responses/409'
- * 
+ * /register:
+ *   $ref: "#/components/paths/register"
  */
 router.post("/register",register)
 
+/**
+ * @swagger
+ * /login:
+ *   $ref: "#/components/paths/login"
+ */
 router.post("/login",login)
 
+/**
+ * @swagger
+ * /refresh-token:
+ *   $ref: "#/components/paths/refreshToken"
+ */
 router.post("/refresh-token",refreshToken)
 
+/**
+ * @swagger
+ * /logout:
+ *   $ref: "#/components/paths/logout"
+ */
 router.delete("/logout",logout)
 
 

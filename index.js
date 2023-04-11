@@ -14,10 +14,25 @@ app.use(express.json())
 app.use(express.urlencoded({extended:true}))
 
 const spec=swaggerJSDoc(options)
-app.use('/api-docs',swaggerUi.serve,swaggerUi.setup(spec))
+app.use('/api-docs',swaggerUi.serve,swaggerUi.setup(spec,{ explorer: true }))
 
-app.get("/", verifyAccessToken,async(req, res, next) =>{
-    res.json({message:"Hello from auth express api"})
+/**
+ * @swagger
+ * /test/:
+ *   $ref: "#/components/paths/protectedRoute"
+ */
+app.get("/auth/test", verifyAccessToken,async(req, res, next) =>{
+  
+    res.json({message:`Hello from auth express api`})
+})
+/**
+* @swagger
+ * /test/:id:
+ *   $ref: "#/components/paths/protectedRoute"
+ */
+app.get("/auth/test/:id", verifyAccessToken,async(req, res, next) =>{
+  
+    res.json({message:`Hello from auth express api ${req.params.id}`,id:req.params.id.toLowerCase()})
 })
 app.use('/auth', [AuthRoute])
 app.use(async ( req, res, next) =>{

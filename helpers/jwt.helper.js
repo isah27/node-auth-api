@@ -9,7 +9,7 @@ module.exports = {
             const paylod={}
             const secret=process.env.ACCESS_TOKEN_SECRET
             const options={
-                expiresIn:'100s',
+                expiresIn:'2h',
                 issuer:"isahnaziru27@gmail.com",
                 audience:userId
             }
@@ -25,7 +25,7 @@ module.exports = {
     // verify access token
     verifyAccessToken: (req,res,next)=>{
         const authHeader=req.headers['authorization']
-        if(!authHeader)return next(createError.Unauthorized())
+        if(!authHeader)return next(createError.Unauthorized("empty access token"))
         const bearerToken=authHeader.split(' ')
         const token=bearerToken[1]
         Jwt.verify(token,process.env.ACCESS_TOKEN_SECRET,(err,decoded)=>{
